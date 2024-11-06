@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View, Image, ScrollView } from "react-native";
 
 import FlatBtn from "../UI/FlatButton";
 import AuthForm from "./AuthForm";
-import { Colors } from "../../constants/styles";
+import { Colors, IMAGENAME } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 
 function AuthContent({ isLogin, onAuthenticate }) {
@@ -35,8 +35,8 @@ function AuthContent({ isLogin, onAuthenticate }) {
       email = email.trim();
     }
 
-    const usernameIsValid = username.length > 6;
-    const passwordIsValid = password.length > 6;
+    const usernameIsValid = username.length > 2 && username.length < 51;
+    const passwordIsValid = password.length > 8;
     const passwordsAreEqual = password === confirmPassword;
     const emailIsValid = !isLogin ? email.includes("@") : false;
     const emailsAreEqual = !isLogin ? email === confirmEmail : false;
@@ -48,11 +48,10 @@ function AuthContent({ isLogin, onAuthenticate }) {
     ) {
       var messageToShow = "Please check your entered credentials.";
       if (!usernameIsValid) {
-        messageToShow =
-          "Kindly enter a valid username with a minimum of 7 characters";
+        messageToShow = "Kindly enter a valid username";
       } else if (!passwordIsValid) {
         messageToShow =
-          "Kindly enter a valid password with a minimum of 7 characters";
+          "Kindly enter a valid password with a minimum of 8 characters";
       } else if (!passwordsAreEqual) {
         messageToShow = "Kindly enter matching passwords";
       } else if (!isLogin) {
@@ -89,16 +88,21 @@ function AuthContent({ isLogin, onAuthenticate }) {
 
   return (
     <View style={styles.authContent}>
-      <AuthForm
-        isLogin={isLogin}
-        onSubmit={submitHandler}
-        credentialsInvalid={credentialsInvalid}
-      />
-      <View style={styles.buttons}>
-        <FlatBtn onPress={switchAuthModeHandler}>
-          {isLogin ? "Create a new user" : "Log in instead"}
-        </FlatBtn>
-      </View>
+      <ScrollView>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} resizeMode="center" source={IMAGENAME} />
+        </View>
+        <AuthForm
+          isLogin={isLogin}
+          onSubmit={submitHandler}
+          credentialsInvalid={credentialsInvalid}
+        />
+        <View style={styles.buttons}>
+          <FlatBtn onPress={switchAuthModeHandler}>
+            {isLogin ? "Create a new user" : "Log in instead"}
+          </FlatBtn>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -117,6 +121,19 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.35,
     shadowRadius: 4,
+  },
+  imageContainer: {
+    height: 125,
+    width: "100%",
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    flex: 1,
+    alignSelf: "center",
+    width: "60%",
+    height: "60%",
   },
   buttons: {
     marginTop: 8,

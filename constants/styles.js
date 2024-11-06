@@ -5,3 +5,5 @@ export const Colors = {
   error100: "#fcdcbf",
   error500: "#f37c13",
 };
+
+export const IMAGENAME = require("./rakbanklogo.jpg");

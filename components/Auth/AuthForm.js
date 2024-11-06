@@ -28,9 +28,11 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
         setEnteredConfirmEmail(enteredValue);
         break;
       case "password":
+        enteredValue = enteredValue.replace(/[^a-zA-Z0-9]/g, "");
         setEnteredPassword(enteredValue);
         break;
       case "confirmPassword":
+        enteredValue = enteredValue.replace(/[^a-zA-Z0-9]/g, "");
         setEnteredConfirmPassword(enteredValue);
         break;
       case "username":

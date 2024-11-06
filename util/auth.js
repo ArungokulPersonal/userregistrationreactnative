@@ -20,16 +20,18 @@ export async function createUserWithSpringBootAPI(email, username, password) {
     email: email,
     password: password,
   });
-  console.log(response.data);
+  const token = response.data.username;
+  return token;
 }
 
 export async function loginUserWithSpringBootAPI(username, password) {
-  const response = await axios.post(
-    "http://10.0.2.2:8080/req/login",
-    {},
-    { auth: { username: username, password: password } }
-  );
+  const response = await axios.get("http://10.0.2.2:8080/req/login", {
+    auth: { username: username, password: password },
+    params: {},
+  });
   console.log(response.data);
+  const token = response.data;
+  return token;
 }
 
 export async function createUser(email, password) {

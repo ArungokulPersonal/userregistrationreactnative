@@ -8,7 +8,7 @@ function IconButtonWithBorder({ children, icon, color, size, onPress }) {
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
       onPress={onPress}
     >
-      <View style={styles.button}>
+      <View>
         <View style={styles.buttonContainer}>
           <Ionicons name={icon} color={color} size={size} />
           <Text style={styles.buttonText}>{children}</Text>
@@ -24,11 +24,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.buttonColor,
-    padding: 10,
-    borderColor: "transparent",
+    justifyContent: "center",
   },
   button: {
+    marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    backgroundColor: "transparent",
+    backgroundColor: Colors.buttonColor,
     elevation: 2,
     shadowColor: Colors.inputColor,
     shadowOffset: { width: 1, height: 1 },

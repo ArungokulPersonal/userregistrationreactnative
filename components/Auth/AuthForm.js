@@ -3,6 +3,8 @@ import { StyleSheet, View } from "react-native";
 
 import CustomBtn from "../UI/Button";
 import Input from "./Input";
+import { Colors } from "../../constants/styles";
+import IconButtonWithBorder from "../UI/IconButtonWithBorder";
 
 function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -41,6 +43,8 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
     }
   }
 
+  function openGoogleSignupHandler() {}
+
   function submitHandler() {
     onSubmit(
       isLogin
@@ -68,6 +72,12 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           value={enteredUsername}
           keyboardType="default"
           isInvalid={usernameIsInvalid}
+          placeholder="Full Name"
+          placeholderTextColor={Colors.inputColor}
+          iconcolor={Colors.inputColor}
+          iconsize={24}
+          iconname="person-circle"
+          maxLength={51}
         />
         {!isLogin && (
           <Input
@@ -76,6 +86,12 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             value={enteredEmail}
             keyboardType="email-address"
             isInvalid={emailIsInvalid}
+            placeholder="Email address"
+            placeholderTextColor={Colors.inputColor}
+            iconcolor={Colors.inputColor}
+            iconsize={24}
+            iconname="at-outline"
+            maxLength={255}
           />
         )}
         {!isLogin && (
@@ -85,6 +101,12 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             value={enteredConfirmEmail}
             keyboardType="email-address"
             isInvalid={emailsDontMatch}
+            placeholder="Confirm Email Address"
+            placeholderTextColor={Colors.inputColor}
+            iconcolor={Colors.inputColor}
+            iconsize={24}
+            iconname="at-outline"
+            maxLength={255}
           />
         )}
         <Input
@@ -93,6 +115,11 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           secure
           value={enteredPassword}
           isInvalid={passwordIsInvalid}
+          placeholder="Enter Password"
+          placeholderTextColor={Colors.inputColor}
+          iconcolor={Colors.inputColor}
+          iconsize={24}
+          iconname="lock-closed"
         />
         {!isLogin && (
           <Input
@@ -104,12 +131,25 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             secure
             value={enteredConfirmPassword}
             isInvalid={passwordsDontMatch}
+            placeholder="Enter Confirm Password"
+            placeholderTextColor={Colors.inputColor}
+            iconcolor={Colors.inputColor}
+            iconsize={24}
+            iconname="lock-closed"
           />
         )}
         <View style={styles.buttons}>
           <CustomBtn onPress={submitHandler}>
             {isLogin ? "Log In" : "Sign Up"}
           </CustomBtn>
+          <IconButtonWithBorder
+            icon="logo-google"
+            color={Colors.formColor}
+            size={24}
+            onPress={openGoogleSignupHandler}
+          >
+            Sign Up With Google
+          </IconButtonWithBorder>
         </View>
       </View>
     </View>

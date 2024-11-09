@@ -11,3 +11,5 @@ export const Colors = {
 };
 
 export const IMAGENAME = require("./rakbanklogo.jpg");
+
+export const SUCCESSANIMATIONJSON = require("./successanimation.json");

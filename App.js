@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import IconButton from "./components/UI/IconButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
+import SuccessAnimationScreen from "./screens/SuccessAnimationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,10 @@ function AuthenticatedStack() {
         contentStyle: { backgroundColor: Colors.primary100 },
       }}
     >
+      <Stack.Screen
+        name="SuccessAnimation"
+        component={SuccessAnimationScreen}
+      />
       <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}

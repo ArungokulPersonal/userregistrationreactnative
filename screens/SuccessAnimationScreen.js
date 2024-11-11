@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { View, Animated, Easing, StyleSheet } from "react-native";
+import { Text, View, Animated, Easing, StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
 import { SUCCESSANIMATIONJSON } from "../constants/styles";
 
-function SuccessAnimationScreen() {
+function SuccessAnimationScreen({ navigation }) {
   const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
   const animationProgress = useRef(new Animated.Value(0));
@@ -17,17 +17,26 @@ function SuccessAnimationScreen() {
     }).start();
   }, []);
 
+  function animationCompletedRedirect() {
+    navigation.replace("Welcome");
+  }
+
   return (
     <View style={styles.container}>
+      <Text style={styles.submitText}>Successfully Submitted!</Text>
       <View style={styles.success}>
         <AnimatedLottieView
           style={styles.lottiestyle}
           source={SUCCESSANIMATIONJSON}
           progress={animationProgress.current}
-          autoPlay
-          loop
+          autoPlay={true}
+          loop={true}
+          onAnimationFinish={animationCompletedRedirect}
         />
       </View>
+      <Text style={styles.belowText}>
+        Our representatives will get in touch with you shortly
+      </Text>
     </View>
   );
 }
@@ -49,6 +58,19 @@ const styles = StyleSheet.create({
     paddingVertical: 100,
   },
   lottiestyle: {
+    flex: 2,
+    marginTop: 20,
+  },
+  submitText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "green",
+  },
+  belowText: {
     flex: 1,
+    marginTop: 30,
+    fontSize: 18,
+    fontWeight: "light",
+    color: "gray",
   },
 });

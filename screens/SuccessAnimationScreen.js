@@ -30,7 +30,7 @@ function SuccessAnimationScreen({ navigation }) {
           source={SUCCESSANIMATIONJSON}
           progress={animationProgress.current}
           autoPlay={true}
-          loop={true}
+          loop={false}
           onAnimationFinish={animationCompletedRedirect}
         />
       </View>
